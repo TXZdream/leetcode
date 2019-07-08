@@ -5,14 +5,17 @@ using namespace std;
 class Solution {
 public:
     void sortColors(vector<int>& nums) {
-        vector<int> cnt(3);
-        for (int i = 0; i < nums.size(); i++) {
-            cnt[nums[i]]++;
-        }
-        nums.clear();
-        for (int i = 0; i < 3; i++) {
-            for (int j = 0; j < cnt[i]; j++) {
-                nums.push_back(i);
+        int zero = 0, two = nums.size() - 1;
+        for (int i = 0; i <= two; i++) {
+            if (nums[i] == 0 && i != zero) {
+                nums[i--] = nums[zero];
+                nums[zero++] = 0;
+                continue;
+            }
+            if (nums[i] == 2) {
+                nums[i--] = nums[two];
+                nums[two--] = 2;
+                continue;
             }
         }
     }
